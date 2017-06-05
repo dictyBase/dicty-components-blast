@@ -5,23 +5,21 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     padding-top: 10px;
-    ${''/* margin-left: 20px; */}
     width: 100%;
 `
 const Title = styled.b`
-    min-width: 20%;
+    width: 170px;
     text-align: left;
-    ${''/* margin-right: 20px; */}
+    padding-right: 5px;
 `
 const S = styled.select`
-    ${''/* margin-le */}
 `
 export default class Select extends Component {
     renderOptions = () => {
         const { options } = this.props
         return options.map((option) => {
             return (
-                <option value={ option.value }>
+                <option selected={ option.default && 'selected' } value={ option.value }>
                     { option.text }
                 </option>
             )

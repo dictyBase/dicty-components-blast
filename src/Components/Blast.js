@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Select from './Select'
+import {
+    programOptions,
+    organismOptions,
+    databaseOptions,
+    eValueOptions,
+    alignmentOptions,
+    wordSizeOptions,
+    matrixOptions
+} from '../constants/Options'
 
 const Container = styled.div`
     margin-top: 20px;
@@ -24,6 +33,7 @@ const Option = styled.div`
     display: flex;
     flex-direction: ${ props => props.direction ? props.direction : 'row' };
     padding: 20px 20px;
+    min-width: calc(47.5% - 40px);
 `
 const Or = styled.p`
     padding: 10px;
@@ -31,6 +41,7 @@ const Or = styled.p`
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 5%;
 `
 const Title = styled.div`
     position: absolute;
@@ -41,48 +52,12 @@ const Title = styled.div`
     background: white;
     z-index: 1000;
     padding: 5px;
+    white-space: nowrap;
 `
-const programOptions = [
-    {
-        default: true,
-        text: '-- Please select a program --',
-        value: null
-    },
-    {
-        text: 'blastn - DNA Query to DNA database',
-        value: null
-    }
-]
-const organismOptions = [
-    {
-        default: true,
-        text: '-- Please select an organism --',
-        value: null
-    },
-    {
-        text: 'All',
-        value: null
-    },
-    {
-        text: 'dictyostelium discoideum',
-        value: null
-    },
-    {
-        text: 'dictyostelium fasciculatum',
-        value: null
-    },
-    {
-        text: 'dictoystelium purpureum',
-        value: null
-    }
-]
-const databaseOptions = [
-    {
-        default: true,
-        text: '-- Please select a database --',
-        value: null
-    }
-]
+const Sequence = styled.textarea`
+    min-height: 200px;
+    max-width: 100%;
+`
 export default class Blast extends Component {
     render() {
         return (
@@ -90,7 +65,7 @@ export default class Blast extends Component {
                 <Query>
                     <Option direction="column">
                         <Title>Query Sequence</Title>
-                        <textarea placeholder="Type or past a query sequence here..."></textarea>
+                        <Sequence placeholder="Type or past a query sequence here..."></Sequence>
                     </Option>
                     <Or>
                         <p>OR</p>
@@ -109,9 +84,12 @@ export default class Blast extends Component {
                         <Select title="Select Organism" options={ organismOptions } />
                         <Select title="Select Database" options={ databaseOptions } />
                     </Option>
-                    <Option>
+                    <Option direction="column">
                         <Title>Options</Title>
-                        <Select title="Select Program" options={ programOptions } />
+                        <Select title="E-value" options={ eValueOptions } />
+                        <Select title="Number of alignments to show" options={ alignmentOptions } />
+                        <Select title="Word size" options={ wordSizeOptions } />
+                        <Select title="Matrix" options={ matrixOptions } />
                     </Option>
                 </Options>
             </Container>
