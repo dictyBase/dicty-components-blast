@@ -6,7 +6,23 @@ export const programOptions = [
     },
     {
         text: 'blastn - DNA Query to DNA database',
-        value: null
+        value: 'blastn'
+    },
+    {
+        text: 'blastp - Protein query to protein database',
+        value: 'blastp'
+    },
+    {
+        text: 'blastx - Translated (6 frames) DNA query to protein database',
+        value: 'blastx'
+    },
+    {
+        text: 'tblastx - Translated (6 frames) DNA query to translated (6 frames) DNA database',
+        value: 'tblastx'
+    },
+    {
+        text: 'tblastn - Protein query to DNA (6 frames) DNA database',
+        value: 'tblastn'
     }
 ]
 export const organismOptions = [
@@ -120,6 +136,7 @@ export const alignmentOptions = [
         value: 25
     },
     {
+        default: true,
         text: '50',
         value: 50
     },

@@ -19,7 +19,7 @@ export default class Select extends Component {
         const { options } = this.props
         return options.map((option) => {
             return (
-                <option selected={ option.default && 'selected' } value={ option.value }>
+                <option key={ option.text } selected={ option.default && 'selected' } value={ option.value }>
                     { option.text }
                 </option>
             )
