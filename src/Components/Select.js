@@ -25,12 +25,16 @@ export default class Select extends Component {
             )
         })
     }
+    handleChange = (e) => {
+        const { onChange } = this.props
+        onChange(e.target.value)
+    }
     render() {
         const { title } = this.props
         return (
             <Container>
                 <Title>{ title }</Title>
-                <S>
+                <S innerRef={ el => this.select = el } onChange={ this.handleChange }>
                     { this.renderOptions() }
                 </S>
             </Container>

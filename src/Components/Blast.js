@@ -1,15 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Select from './Select'
-import {
-    programOptions,
-    organismOptions,
-    databaseOptions,
-    eValueOptions,
-    alignmentOptions,
-    wordSizeOptions,
-    matrixOptions
-} from '../constants/Options'
+import Check from './Check'
 
 const Container = styled.div`
     margin-top: 20px;
@@ -77,9 +69,29 @@ const SearchBox = styled.input`
 const SearchButton = styled.button`
     height: 24px;
 `
-
+const Note = styled.b`
+    color: grey;
+`
 export default class Blast extends Component {
     render() {
+        const {
+            handleEValueChange,
+            handleProgramChange,
+            handleOrganismChange,
+            handleDatabaseChange,
+            handleAlignmentChange,
+            handleWordSizeChange,
+            handleMatrixChange,
+            handleGappedAlignmentChange,
+            handleFilterChange,
+            programOptions,
+            organismOptions,
+            databaseOptions,
+            eValueOptions,
+            alignmentOptions,
+            wordSizeOptions,
+            matrixOptions
+        } = this.props
         return (
             <Container>
                 <Query>
@@ -104,21 +116,27 @@ export default class Blast extends Component {
                 <Options>
                     <Option>
                         <Title>BLAST Program</Title>
-                        <Select title="Select Program" options={ programOptions } />
+                        <Select title="Select Program" options={ programOptions } onChange={ handleProgramChange }/>
                     </Option>
                     <Option direction="column">
                         <Title>BLAST Database</Title>
-                        <Select title="Select Organism" options={ organismOptions } />
-                        <Select title="Select Database" options={ databaseOptions } />
+                        <Select title="Select Organism" options={ organismOptions } onChange={ handleOrganismChange }/>
+                        <Select title="Select Database" options={ databaseOptions } onChange={ handleDatabaseChange }/>
                     </Option>
                     <Option direction="column">
                         <Title>Options</Title>
-                        <Select title="E-value" options={ eValueOptions } />
-                        <Select title="Number of alignments to show" options={ alignmentOptions } />
-                        <Select title="Word size" options={ wordSizeOptions } />
-                        <Select title="Matrix" options={ matrixOptions } />
-                        <b>Gapped Alignment</b>
-                        <input type="checkbox"></input>
+                        <Select title="E-value" options={ eValueOptions } onChange={ handleEValueChange }/>
+                        <Select title="Number of alignments to show" options={ alignmentOptions } onChange={ handleAlignmentChange }/>
+                        <Select title="Word size" options={ wordSizeOptions } onChange={ handleWordSizeChange }/>
+                        <Select title="Matrix" options={ matrixOptions } onChange={ handleMatrixChange }/>
+                        <Check title="Gapped Alignment" onChange={ handleGappedAlignmentChange }/>
+                        <Check title="Filter" onChange={ handleFilterChange }/>
+                        <Note>DUST filter for BLASTN, SEG filter for all others.</Note>
+                        <Note>
+                            Because of resource limits, when BLASTing against the Chromosomal database
+                            with filtering off, the filtering is actually set to 'm D' which turns off
+                            filtering for extending hits, but leaves filtering on when building the initial words.
+                        </Note>
                     </Option>
                 </Options>
             </Container>
